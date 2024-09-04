@@ -28,6 +28,7 @@ const HomePage = () => {
       navigate("/email");
     }
   }, [data, navigate]);
+
   if (!data) return <div>carregando</div>;
 
   const basePath = location.pathname === "/";
