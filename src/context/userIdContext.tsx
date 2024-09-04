@@ -27,9 +27,11 @@ interface User {
 const UserIdContext = createContext({} as UserIdContextData);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [_user, setUser] = useState<User>();
+  const [user, setUser] = useState<User>();
 
-  // console.log("user", user);
+  function setUserIdContext({ name, profile_pic, _id, token, email }: User) {
+    setUser({ name, profile_pic, _id, token, email });
+  }
 
   const [usersOnline, setUsersOnline] = useState<[]>([]);
 
@@ -37,20 +39,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     setUsersOnline(users);
   };
 
-  const setUserIdContext = ({ name, profile_pic, _id, token, email }: User) => {
-    setUser({ name, profile_pic, _id, token, email });
-  };
-
   return (
     <UserIdContext.Provider
       value={{
-        user: {
-          _id: "",
-          name: "",
-          email: "",
-          profile_pic: "",
-          token: "",
-        },
+        user: user!,
         setUserIdContext,
         handleUsersOnline,
         usersOnline,

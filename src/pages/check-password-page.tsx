@@ -17,6 +17,8 @@ type FormData = z.infer<typeof schemaInput>;
 const PasswordPage = () => {
   const navigate = useNavigate();
   const { user } = useUserContext();
+
+  console.log(user);
   const {
     register,
     handleSubmit,
