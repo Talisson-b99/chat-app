@@ -23,15 +23,12 @@ const HomePage = () => {
     },
   });
 
+  useEffect(() => {
+    if (data?.data?.logout || data?.error) {
+      navigate("/email");
+    }
+  }, [data, navigate]);
   if (!data) return <div>carregando</div>;
-
-  if (data?.data?.logout) {
-    return navigate("/email");
-  }
-
-  if (data?.error) {
-    return navigate("/email");
-  }
 
   const basePath = location.pathname === "/";
 

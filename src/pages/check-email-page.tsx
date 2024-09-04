@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
-import Input from "../components/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { checkEmail } from "../api/check-email";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import useUserContext from "../context/userIdContext";
+import { STYLE_INPUT } from "../constants/style-input";
 
 const schemaInput = z.object({
   email: z.string().email({ message: "Email inválido" }),
@@ -68,11 +68,11 @@ const EmailPage = () => {
 
         <form className="mt-4 space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <Input
+            <input
               placeholder="Digite seu email"
               type="text"
-              name="email"
-              register={register}
+              {...register("email")}
+              className={`${STYLE_INPUT}`}
             />
             <p className="text-xs text-red-500">{errors.email?.message}</p>
           </div>
