@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Image,
@@ -22,6 +23,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import updateLocale from "dayjs/plugin/updateLocale";
 import "dayjs/locale/pt-br";
+import useUserContext from "../context/userIdContext";
 
 dayjs.extend(relativeTime);
 dayjs.extend(updateLocale);
@@ -33,13 +35,16 @@ const Sidebar = () => {
   const [allUsers, setAllUsers] = useState<any[]>([]);
   const { socketConnection } = useUserOnline();
   const { modalSearch, handleEditUserOpen } = useContextModalSearch();
+  const { user, setUserIdContext } = useUserContext();
 
   const { data } = useQuery({
     queryKey: ["details"],
     queryFn: getDetails,
   });
 
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  useEffect(() => {
+    setUserIdContext(data?.data?.user);
+  }, []);
 
   useEffect(() => {
     if (socketConnection) {

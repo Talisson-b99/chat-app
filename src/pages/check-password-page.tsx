@@ -6,7 +6,6 @@ import useUserContext from "../context/userIdContext";
 import { checkPassword } from "../api/check-password";
 import { toast } from "sonner";
 import { UserCircle2 } from "lucide-react";
-import { useEffect } from "react";
 import { STYLE_INPUT } from "../constants/style-input";
 
 const schemaInput = z.object({
@@ -29,13 +28,6 @@ const PasswordPage = () => {
       password: "",
     },
   });
-
-  useEffect(() => {
-    if (user._id === null) {
-      return navigate("/email");
-    }
-    console.log(user._id);
-  }, [user._id, navigate]);
 
   const onSubmit = async (data: FormData) => {
     try {
