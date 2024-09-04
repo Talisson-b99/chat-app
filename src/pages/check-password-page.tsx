@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Input from "../components/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -8,6 +7,7 @@ import { checkPassword } from "../api/check-password";
 import { toast } from "sonner";
 import { UserCircle2 } from "lucide-react";
 import { useEffect } from "react";
+import { STYLE_INPUT } from "../constants/style-input";
 
 const schemaInput = z.object({
   password: z.string().min(6, { message: "Senha inválido" }),
@@ -79,11 +79,11 @@ const PasswordPage = () => {
 
         <form className="mt-4 space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <Input
+            <input
+              className={`${STYLE_INPUT}`}
               placeholder="Digite sua senha"
               type="password"
-              name="password"
-              register={register}
+              {...register("password")}
             />
             <p className="text-xs text-red-500">{errors.password?.message}</p>
           </div>
