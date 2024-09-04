@@ -7,11 +7,13 @@ import logo from "../assets/logo.png";
 
 import { useEffect } from "react";
 import { useUserOnline } from "../context/usersOnline";
+import useUserContext from "../context/userIdContext";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { usersOnline } = useUserOnline();
+  const { user } = useUserContext();
 
   useEffect(() => {}, [usersOnline]);
 
@@ -24,10 +26,12 @@ const HomePage = () => {
   });
 
   useEffect(() => {
-    if (data?.data?.logout || data?.error) {
+    if (!user.token) {
       navigate("/email");
     }
-  }, [data, navigate]);
+
+    navigate("/");
+  }, []);
 
   if (!data) return <div>carregando</div>;
 

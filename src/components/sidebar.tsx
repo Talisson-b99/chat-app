@@ -36,6 +36,7 @@ const Sidebar = () => {
   const { socketConnection } = useUserOnline();
   const { modalSearch, handleEditUserOpen } = useContextModalSearch();
   const { user, setUserIdContext } = useUserContext();
+  // const navigate = useNavigate();
 
   const { data } = useQuery({
     queryKey: ["details"],
@@ -43,6 +44,7 @@ const Sidebar = () => {
   });
 
   useEffect(() => {
+    // if (data.data.logout) navigate("/email");
     setUserIdContext(data?.data?.user);
   }, []);
 
