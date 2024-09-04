@@ -27,7 +27,9 @@ interface User {
 const UserIdContext = createContext({} as UserIdContextData);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User>();
+  const [_user, setUser] = useState<User>();
+
+  // console.log("user", user);
 
   const [usersOnline, setUsersOnline] = useState<[]>([]);
 
