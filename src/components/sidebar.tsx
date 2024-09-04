@@ -23,7 +23,6 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import updateLocale from "dayjs/plugin/updateLocale";
 import "dayjs/locale/pt-br";
-import useUserContext from "../context/userIdContext";
 
 dayjs.extend(relativeTime);
 dayjs.extend(updateLocale);
@@ -35,18 +34,13 @@ const Sidebar = () => {
   const [allUsers, setAllUsers] = useState<any[]>([]);
   const { socketConnection } = useUserOnline();
   const { modalSearch, handleEditUserOpen } = useContextModalSearch();
-  const { user, setUserIdContext } = useUserContext();
-  // const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   const { data } = useQuery({
     queryKey: ["details"],
     queryFn: getDetails,
   });
-
-  useEffect(() => {
-    // if (data.data.logout) navigate("/email");
-    setUserIdContext(data?.data?.user);
-  }, []);
 
   useEffect(() => {
     if (socketConnection) {
@@ -78,7 +72,7 @@ const Sidebar = () => {
         console.log(conversationData);
       },
     );
-  }, [socketConnection, user._id]);
+  }, [socketConnection]);
 
   if (!data) return <p>carregando</p>;
 

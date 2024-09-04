@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, ReactNode, useContext, useState } from "react";
 
@@ -26,13 +27,7 @@ interface User {
 const UserIdContext = createContext({} as UserIdContextData);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User>({
-    _id: null,
-    name: "",
-    email: "",
-    profile_pic: null,
-    token: null,
-  });
+  const [user, setUser] = useState<User>();
 
   const [usersOnline, setUsersOnline] = useState<[]>([]);
 
@@ -41,16 +36,23 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const setUserIdContext = ({ name, profile_pic, _id, token, email }: User) => {
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ name, profile_pic, _id, token, email }),
-    );
     setUser({ name, profile_pic, _id, token, email });
   };
 
   return (
     <UserIdContext.Provider
-      value={{ user, setUserIdContext, handleUsersOnline, usersOnline }}
+      value={{
+        user: {
+          _id: "",
+          name: "",
+          email: "",
+          profile_pic: "",
+          token: "",
+        },
+        setUserIdContext,
+        handleUsersOnline,
+        usersOnline,
+      }}
     >
       {children}
     </UserIdContext.Provider>

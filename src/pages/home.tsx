@@ -7,13 +7,13 @@ import logo from "../assets/logo.png";
 
 import { useEffect } from "react";
 import { useUserOnline } from "../context/usersOnline";
-import useUserContext from "../context/userIdContext";
+// import useUserContext from "../context/userIdContext";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { usersOnline } = useUserOnline();
-  const { user } = useUserContext();
+  // const { user } = useUserContext();
 
   useEffect(() => {}, [usersOnline]);
 
@@ -26,8 +26,9 @@ const HomePage = () => {
   });
 
   useEffect(() => {
-    if (!user.token) {
+    if (!document.cookie.includes("token")) {
       navigate("/email");
+      return;
     }
 
     navigate("/");
