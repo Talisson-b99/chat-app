@@ -33,12 +33,13 @@ const Sidebar = () => {
   const [allUsers, setAllUsers] = useState<any[]>([]);
   const { socketConnection } = useUserOnline();
   const { modalSearch, handleEditUserOpen } = useContextModalSearch();
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   const { data } = useQuery({
     queryKey: ["details"],
     queryFn: getDetails,
   });
+
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   useEffect(() => {
     if (socketConnection) {
@@ -96,12 +97,12 @@ const Sidebar = () => {
           <div className="flex items-center justify-center">
             <div
               className="flex size-10 items-center justify-center overflow-hidden rounded-full bg-slate-200"
-              title={data.data.user.name}
+              title={data?.data?.user?.name}
             >
               <button onClick={() => setEditUserOpen(true)}>
-                {data.data.user.profile_pic ? (
+                {data?.data?.user?.profile_pic ? (
                   <img
-                    src={data.data.user.profile_pic}
+                    src={data?.data?.user?.profile_pic}
                     alt=""
                     className="object-cover"
                   />

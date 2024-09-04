@@ -22,7 +22,15 @@ export const UserOnlineProvider = ({ children }: { children: ReactNode }) => {
   const [socketConnection, setSocketConnection] = useState<any>();
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token")!);
+    const token = localStorage.getItem("token");
+
+    console.log("token", token);
+    // const token = JSON.parse(localStorage.getItem("token")!);
+
+    // if (token === undefined) {
+    //   console.log("Token não encontrado");
+    //   return;
+    // }
 
     const socket = io("http://localhost:3001", {
       auth: {

@@ -26,25 +26,12 @@ interface User {
 const UserIdContext = createContext({} as UserIdContextData);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User>(() => {
-    const storedUser = localStorage.getItem("user");
-
-    if (storedUser) {
-      try {
-        return JSON.parse(storedUser); // Tenta converter para JSON
-      } catch (error) {
-        console.error("Erro ao fazer parse do JSON de 'user':", error);
-        return {
-          _id: null,
-          name: "",
-          email: "",
-          profile_pic: null,
-          token: null,
-        }; // Valor padrão em caso de erro
-      }
-    } else {
-      return { _id: null, name: "", email: "", profile_pic: null, token: null }; // Valor padrão se não houver nada no localStorage
-    }
+  const [user, setUser] = useState<User>({
+    _id: null,
+    name: "",
+    email: "",
+    profile_pic: null,
+    token: null,
   });
 
   const [usersOnline, setUsersOnline] = useState<[]>([]);

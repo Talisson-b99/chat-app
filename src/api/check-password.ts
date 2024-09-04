@@ -11,7 +11,10 @@ export async function checkPassword(data: Props) {
     },
     body: JSON.stringify(data),
     credentials: "include",
-  });
+  }).then((response) => response.json());
 
-  return response.json();
+  console.log("response", response);
+  localStorage.setItem("token", response.token);
+
+  return response;
 }
