@@ -19,7 +19,14 @@ const HomePage = () => {
     queryKey: "details",
     queryFn: getDetails,
     onSuccess: (data) => {
-      localStorage.setItem("token", JSON.stringify(data.data.token));
+      if (data?.data?.token) {
+        // Verifique se o token existe
+        localStorage.setItem("token", JSON.stringify(data.data.token));
+      } else {
+        console.warn("Nenhum token retornado da API.");
+        // Se necessário, remova o token anterior ou tome outra ação
+        localStorage.removeItem("token");
+      }
     },
   });
 
