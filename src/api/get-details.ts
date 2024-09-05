@@ -7,7 +7,6 @@ export async function getDetails() {
     credentials: "include",
   }).then((response) => response.json());
 
-  localStorage.setItem("user", JSON.stringify(response.data.user));
   localStorage.setItem("token", response.data.token);
 
   return response;
