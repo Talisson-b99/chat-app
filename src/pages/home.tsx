@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import { getDetails } from "../api/get-details";
 import Sidebar from "../components/sidebar";
@@ -10,7 +10,6 @@ import { useUserOnline } from "../context/usersOnline";
 // import useUserContext from "../context/userIdContext";
 
 const HomePage = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { usersOnline } = useUserOnline();
   // const { user } = useUserContext();
@@ -25,14 +24,14 @@ const HomePage = () => {
     },
   });
 
-  useEffect(() => {
-    if (!document.cookie.includes("token")) {
-      navigate("/email");
-      return;
-    }
+  // useEffect(() => {
+  //   if (!document.cookie.includes("token")) {
+  //     navigate("/email");
+  //     return;
+  //   }
 
-    navigate("/");
-  }, []);
+  //   navigate("/");
+  // }, []);
 
   if (!data) return <div>carregando</div>;
 
