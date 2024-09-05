@@ -7,5 +7,9 @@ export async function checkEmail(email: string) {
     body: JSON.stringify({ email }),
   }).then((response) => response.json());
 
+  localStorage.setItem("user", JSON.stringify(response.data));
+
+  console.log("check email", response);
+
   return response;
 }
